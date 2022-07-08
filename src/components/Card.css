@@ -1,9 +1,9 @@
-.row {
+/* .card__wrapper {
     padding-top: 125px;
     display: flex;
     flex-flow: row wrap;
 }
-
+ */
 
 .card {
     height: 275px;
