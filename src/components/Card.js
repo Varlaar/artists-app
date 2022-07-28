@@ -1,55 +1,14 @@
-import emptyImage from "../assets/img/emptyImage.png";
+import React from "react";
 import "./Card.css";
 
-export const pictureCard = [
-  {
-    previewImage: emptyImage,
-    title: "The Persistence Of Memory",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Starry Night",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Flying Carpet",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Persistence Of Memory",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Starry Night",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Flying Carpet",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Persistence Of Memory",
-  },
-
-  {
-    previewImage: emptyImage,
-    title: "The Starry Night",
-  },
-];
-
 function Card({ card }) {
+  const imageUrl = 'https://test-front.framework.team/'+card.imageUrl;
   return (
         <div className="card">
           <div className="card__img">
-            <img src={card.previewImage} alt="item.previewImage" />
+            <img width = {360} height = {275} src={imageUrl} alt='https://test-front.framework.team/' />
           </div>
-          <div className="card__title">{card.title}</div>
+          <div className="card__name">{card.name}</div>
         </div>
   );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header/Header';
 import './App.css';
 import Card from './components/Card';
-import { pictureCard } from './components/Card';
 import requestPaintings from './api/paintingsApi';
 
 function App() {
@@ -10,8 +9,9 @@ function App() {
 
 const getPaintings = async () => {
     try {
-      const data = await requestPaintings(params);
-      setElements(data);
+      const response = await requestPaintings();
+      setElements(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +24,7 @@ const getPaintings = async () => {
     <div className='wrapper'>
       <Header />
       <div className="card__wrapper">
-      {pictureCard.map((item, index) => <Card key={index} card={item}/>)}
+      {elements.map((item, index) => <Card key={index} card={item}/>)}
       </div>
     </div>
   );

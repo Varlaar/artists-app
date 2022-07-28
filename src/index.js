@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
-
-axios.get('https://test-front.framework.team/paintings')
-  .then(data => console.log(data))
-  .catch(error => console.error('Ошибка:', error))
+import "typeface-roboto";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
