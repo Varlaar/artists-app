@@ -1,8 +1,8 @@
 import instance from "./instance";
-import querryToString from "./utils/querryToString";
+import queryToString from "./utils/queryToString";
 
-const requestPaintings = (params = {}) => {
-    return instance.get('/paintings?' + querryToString(params));
+const requestPaintings = (params) => {
+    return instance.get('/paintings?' + queryToString(params));
 }
 
 export default requestPaintings;
