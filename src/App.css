@@ -29,3 +29,17 @@
     border-radius: 8px;
 }
 
+.isLoading {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+
+.isLoadingTrue {
+    margin: 100px 0 0 0;
+    color: #fff;
+    font-size: 20px;
+    font-family: Roboto;
+    font-weight: 500;
+}

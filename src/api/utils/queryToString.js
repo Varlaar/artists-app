@@ -1,12 +1,12 @@
 const queryToString = (params) => {
-    const stringParams = Object.keys(params)
-    .filter(key => params[key])
-    .map(key => {
-        return `${key}=${params[key]}`;
+  const stringParams = Object.keys(params)
+    .filter((key) => params[key])
+    .map((key) => {
+      return `${key}=${params[key]}`;
     })
-    .join('&');
+    .join("&");
 
-    return stringParams;
-}
+  return stringParams;
+};
 
 export default queryToString;

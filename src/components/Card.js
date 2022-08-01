@@ -7,7 +7,7 @@ function Card({ card }) {
   return (
         <div className="card">
           <div className="card__img">
-            <img src={imageUrl} alt='card.name'/>
+            <img src={imageUrl} alt={card.name}/>
           </div>
           <div className="card__name">{card.name}</div>
         </div>

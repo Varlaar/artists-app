@@ -8,15 +8,11 @@
 }
 
 
-/* .card:nth-child(3n+2) {
-    margin: 0 20px 20px 20px;
-} */
-
-
 .card__img img {
     width: 360px;
     height: 275px;
 }
+
 
 .card__name {
     position: absolute;
@@ -27,3 +23,5 @@
     font-size: 18px;
     font-family: Roboto;
 }
+
+
