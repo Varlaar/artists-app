@@ -1,0 +1,29 @@
+.card {
+    height: 275px;
+    width: calc (33.333% - 20px);
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+
+/* .card:nth-child(3n+2) {
+    margin: 0 20px 20px 20px;
+} */
+
+
+.card__img img {
+    width: 360px;
+    height: 275px;
+}
+
+.card__name {
+    position: absolute;
+    bottom: 5px;
+    padding-left: 15px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Roboto;
+}
