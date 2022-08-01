@@ -3,6 +3,7 @@ import Header from "./Header/Header";
 import "./App.css";
 import Card from "./components/Card";
 import requestPaintings from "./api/paintingsApi";
+import { Pagination } from "fwt-internship-uikit";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -59,29 +60,13 @@ function App() {
           </div>
         )}
       </div>
-      <div className="pagination">
-        <button
-          onClick={() =>
-            setParams((prevParams) => ({ ...prevParams, _page: 1 }))
-          }
-        >
-          1
-        </button>
-        <button
-          onClick={() =>
-            setParams((prevParams) => ({ ...prevParams, _page: 2 }))
-          }
-        >
-          2
-        </button>
-        <button
-          onClick={() =>
-            setParams((prevParams) => ({ ...prevParams, _page: 3 }))
-          }
-        >
-          3
-        </button>
-      </div>
+      <Pagination
+        currentPage={params._page}
+        pagesAmount={3}
+        onChange={(page) =>
+          setParams((prevParams) => ({ ...prevParams, _page: page }))
+        }
+      />
     </div>
   );
 }
