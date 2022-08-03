@@ -1,8 +1,7 @@
 import instance from "./instance";
-import queryToString from "./utils/queryToString";
 
-const requestAuthors = (params) => {
-  return instance.get("/authors?" + queryToString(params));
+const requestAuthors = () => {
+  return instance.get("/authors");
 };
 
 export default requestAuthors;

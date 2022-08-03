@@ -2,8 +2,9 @@ import React from "react";
 import Header from "./Header/Header";
 import "./App.css";
 import Card from "./components/Card";
+import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
-import { Input, Pagination } from "fwt-internship-uikit";
+import { Input, Pagination, Select } from "fwt-internship-uikit";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -13,25 +14,38 @@ function App() {
     _limit: 12,
     q: "",
   });
+  const [authors, setAuthors] = React.useState([]);
+  const [selectedAuhors, setSelectedAuthors] = React.useState();
 
   const getPaintings = React.useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await requestPaintings(params);
       setElements(response.data);
-        setIsLoading(false);
+      setIsLoading(false);
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   }, [params]);
 
+  const getAuthors = React.useCallback(async () => {
+    try {
+      const response = await requestAuthors();
+      setAuthors(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  
   React.useEffect(() => {
     getPaintings();
-  }, [getPaintings]);
+    getAuthors();
+    // getAuthors(); -> [{id: 0, name: 'test'}]
+  }, [getPaintings, getAuthors]);
 
-  const handleSearchChange = (text) => {
-    setParams({ ...params, q: text });
+  const handleSearchChange = (q) => {
+    setParams({ ...params, q });
   };
 
   return (
@@ -42,6 +56,8 @@ function App() {
         placeholder="Name"
         onChange={(event) => handleSearchChange(event.target.value)}
       />
+      <Select options={authors} value={'Authors'} onChange={(name) => setAuthors(name)}/>
+      {/* Select -> options={authors} onChange ->  name */}
       <div className="isLoading">
         {isLoading ? (
           <p className="isLoadingTrue">Loading...</p>
