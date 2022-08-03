@@ -15,7 +15,7 @@ function App() {
     q: "",
   });
   const [author, setAuthor] = React.useState([]);
-  const [selectedAuthor, setSelectedAuthor] = React.useState();
+  const [selectedAuthor, setSelectedAuthor] = React.useState(null);
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -49,7 +49,7 @@ function App() {
   };
 
   const handSelectAuthorChange = (name) => {
-    setAuthor({name});
+    setAuthor(name);
   };
 
   return (
