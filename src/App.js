@@ -3,7 +3,7 @@ import Header from "./Header/Header";
 import "./App.css";
 import Card from "./components/Card";
 import requestPaintings from "./api/paintingsApi";
-import { Pagination } from "fwt-internship-uikit";
+import { Input, Pagination } from "fwt-internship-uikit";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -19,9 +19,7 @@ function App() {
       setIsLoading(true);
       const response = await requestPaintings(params);
       setElements(response.data);
-      setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -39,16 +37,11 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-      <div className="form">
-        <form className="search__form" action="/" method="get">
-          <input
-            className="search__input"
-            onChange={(event) => handleSearchChange(event.target.value)}
-            name="s"
-            type="search"
-          />
-        </form>
-      </div>
+      <Input
+        className="Input"
+        placeholder="Name"
+        onChange={(event) => handleSearchChange(event.target.value)}
+      />
       <div className="isLoading">
         {isLoading ? (
           <p className="isLoadingTrue">Loading...</p>
@@ -61,6 +54,7 @@ function App() {
         )}
       </div>
       <Pagination
+        className="Pagination"
         currentPage={params._page}
         pagesAmount={3}
         onChange={(page) =>

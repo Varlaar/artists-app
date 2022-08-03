@@ -5,18 +5,23 @@
 
 
 .card__wrapper {
-    padding-top: 125px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
 }
 
 
-.search__input {
-    margin-top: 80px;
-    height: 45px;
-    width: 220px;
-    border-radius: 8px;
+.Input {
+    margin: 35px 0 45px 0;
+}
+
+
+.Input::placeholder {
+    color: #000;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: Roboto;
+    opacity: 30%;
 }
 
 
@@ -29,8 +34,13 @@
 
 .isLoadingTrue {
     margin: 100px 0 0 0;
-    color: #fff;
+    color: #000;
     font-size: 20px;
     font-family: Roboto;
     font-weight: 500;
+}
+
+
+.Pagination {
+    margin-top: 20px;
 }
