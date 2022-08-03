@@ -14,8 +14,8 @@ function App() {
     _limit: 12,
     q: "",
   });
-  const [authors, setAuthors] = React.useState([]);
-  const [selectedAuhors, setSelectedAuthors] = React.useState();
+  const [author, setAuthor] = React.useState([]);
+  const [selectedAuthor, setSelectedAuthor] = React.useState();
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -29,23 +29,27 @@ function App() {
     }
   }, [params]);
 
-  const getAuthors = React.useCallback(async () => {
+  const getAuthor = React.useCallback(async () => {
     try {
       const response = await requestAuthors();
-      setAuthors(response.data);
+      setAuthor(response.data);
     } catch (error) {
       console.log(error);
     }
   }, []);
-  
+
   React.useEffect(() => {
     getPaintings();
-    getAuthors();
-    // getAuthors(); -> [{id: 0, name: 'test'}]
-  }, [getPaintings, getAuthors]);
+    getAuthor();
+    setSelectedAuthor();
+  }, [getPaintings, getAuthor, setSelectedAuthor]);
 
   const handleSearchChange = (q) => {
     setParams({ ...params, q });
+  };
+
+  const handSelectAuthorChange = (name) => {
+    setAuthor({name});
   };
 
   return (
@@ -56,8 +60,11 @@ function App() {
         placeholder="Name"
         onChange={(event) => handleSearchChange(event.target.value)}
       />
-      <Select options={authors} value={'Authors'} onChange={(name) => setAuthors(name)}/>
-      {/* Select -> options={authors} onChange ->  name */}
+      <Select
+        options={author}
+        value={selectedAuthor.name}
+        onChange={(event) => handSelectAuthorChange(event.target.value)}
+      />
       <div className="isLoading">
         {isLoading ? (
           <p className="isLoadingTrue">Loading...</p>
