@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames";
 import Header from "./Header/Header";
 import "./App.css";
 import Card from "./components/Card";
@@ -17,7 +18,9 @@ function App() {
   });
   const [authors, setAuthors] = React.useState([]);
   const [selectedAuthor, setSelectedAuthor] = React.useState(null);
-  // const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+  const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -55,55 +58,56 @@ function App() {
     console.log(findAuthor);
   };
 
-  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-  const switchTheme = () => {
-    setIsDarkTheme(isDarkTheme === false ? false : true);
+  const handleSwitchTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
   };
 
   return (
-    <div className="wrapper">
-      <Header onClick={switchTheme} />
-      <div className="Content">
-        <Input
-          className="Input"
-          isDarkTheme={false}
-          placeholder="Name"
-          onChange={(event) => handleSearchChange(event.target.value)}
-        />
-        <Select
-          className="Select"
-          isDarkTheme={false}
-          options={authors}
-          value={
-            selectedAuthor ? (
-              <option>{selectedAuthor.name}</option>
-            ) : (
-              <option>Author</option>
-            )
+    <div className={wrapperClass}>
+      <div className="Container">
+        <Header onClick={handleSwitchTheme} />
+        <div className="Content">
+          <Input
+            className="Input"
+            isDarkTheme={isDarkTheme}
+            placeholder="Name"
+            onChange={(event) => handleSearchChange(event.target.value)}
+          />
+          <Select
+            className="Select"
+            isDarkTheme={isDarkTheme}
+            options={authors}
+            value={
+              selectedAuthor ? (
+                <option>{selectedAuthor.name}</option>
+              ) : (
+                <option>Author</option>
+              )
+            }
+            onChange={handleSelectedAuthorChange}
+          />
+        </div>
+        <div className="content">
+          {isLoading ? (
+            <p className="Loading">Loading...</p>
+          ) : (
+            <div className="card__wrapper">
+              {elements.map((item, index) => (
+                <Card key={index} card={item} />
+              ))}
+            </div>
+          )}
+        </div>
+        <Pagination
+          className="Pagination"
+          isDarkTheme={isDarkTheme}
+          currentPage={params._page}
+          pagesAmount={TOTAL_NUMBER_OF_PAGES}
+          onChange={(page) =>
+            setParams((prevParams) => ({ ...prevParams, _page: page }))
           }
-          onChange={handleSelectedAuthorChange}
         />
       </div>
-      <div className="content">
-        {isLoading ? (
-          <p className="Loading">Loading...</p>
-        ) : (
-          <div className="card__wrapper">
-            {elements.map((item, index) => (
-              <Card key={index} card={item} />
-            ))}
-          </div>
-        )}
-      </div>
-      <Pagination
-        className="Pagination"
-        isDarkTheme={false}
-        currentPage={params._page}
-        pagesAmount={TOTAL_NUMBER_OF_PAGES}
-        onChange={(page) =>
-          setParams((prevParams) => ({ ...prevParams, _page: page }))
-        }
-      />
     </div>
   );
 }
