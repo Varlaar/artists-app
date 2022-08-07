@@ -1,8 +1,10 @@
 import logo from "../assets/img/logo.png";
 import switch_theme from "../assets/img/switch_theme.png"
 import "./Header.css"
+import React from "react";
 
 function Header() {
+
     return(
         <div className="container">
             <img src={logo} alt="logo" />

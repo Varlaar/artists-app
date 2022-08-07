@@ -1,2 +1,2 @@
 export const API_URL = 'https://test-front.framework.team/';
-export const NUMBER_OF_PAGES = 3;
+export const TOTAL_NUMBER_OF_PAGES = 3;

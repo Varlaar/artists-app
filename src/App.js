@@ -5,7 +5,7 @@ import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import { Input, Pagination, Select } from "fwt-internship-uikit";
-import { NUMBER_OF_PAGES } from "./assets/constants";
+import { TOTAL_NUMBER_OF_PAGES } from "./assets/constants";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -17,6 +17,7 @@ function App() {
   });
   const [authors, setAuthors] = React.useState([]);
   const [selectedAuthor, setSelectedAuthor] = React.useState(null);
+  // const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -49,24 +50,40 @@ function App() {
   };
 
   const handleSelectedAuthorChange = (name) => {
-    const findAuthor = authors.find(item => item.name === name)
+    const findAuthor = authors.find((item) => item.name === name);
     setSelectedAuthor(findAuthor);
-    console.log(findAuthor)
+    console.log(findAuthor);
+  };
+
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const switchTheme = () => {
+    setIsDarkTheme(isDarkTheme === false ? false : true);
   };
 
   return (
     <div className="wrapper">
-      <Header />
-      <Input
-        className="Input"
-        placeholder="Name"
-        onChange={(event) => handleSearchChange(event.target.value)}
-      />
-      <Select
-        options={authors}
-        value={selectedAuthor?.name}
-        onChange={handleSelectedAuthorChange}
-      />
+      <Header onClick={switchTheme} />
+      <div className="Content">
+        <Input
+          className="Input"
+          isDarkTheme={false}
+          placeholder="Name"
+          onChange={(event) => handleSearchChange(event.target.value)}
+        />
+        <Select
+          className="Select"
+          isDarkTheme={false}
+          options={authors}
+          value={
+            selectedAuthor ? (
+              <option>{selectedAuthor.name}</option>
+            ) : (
+              <option>Author</option>
+            )
+          }
+          onChange={handleSelectedAuthorChange}
+        />
+      </div>
       <div className="content">
         {isLoading ? (
           <p className="Loading">Loading...</p>
@@ -80,8 +97,9 @@ function App() {
       </div>
       <Pagination
         className="Pagination"
+        isDarkTheme={false}
         currentPage={params._page}
-        pagesAmount = {NUMBER_OF_PAGES}
+        pagesAmount={TOTAL_NUMBER_OF_PAGES}
         onChange={(page) =>
           setParams((prevParams) => ({ ...prevParams, _page: page }))
         }

@@ -11,17 +11,35 @@
 }
 
 
+.Content {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 35px 0 45px 0;
+}
+
+
 .Input {
-    margin: 35px 0 45px 0;
+    font-weight: 500;
+    margin-right: 20px;
 }
 
 
 .Input::placeholder {
     color: #000;
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     font-family: Roboto;
     opacity: 30%;
+}
+
+.Select {
+    font-weight: 500;
+}
+
+
+option {
+    font-size: 13px;
+    font-weight: 400;
 }
 
 
