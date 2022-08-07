@@ -5,6 +5,7 @@ import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import { Input, Pagination, Select } from "fwt-internship-uikit";
+import { NUMBER_OF_PAGES } from "./assets/constants";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -14,7 +15,7 @@ function App() {
     _limit: 12,
     q: "",
   });
-  const [author, setAuthor] = React.useState([]);
+  const [authors, setAuthors] = React.useState([]);
   const [selectedAuthor, setSelectedAuthor] = React.useState(null);
 
   const getPaintings = React.useCallback(async () => {
@@ -29,10 +30,10 @@ function App() {
     }
   }, [params]);
 
-  const getAuthor = React.useCallback(async () => {
+  const getAuthors = React.useCallback(async () => {
     try {
       const response = await requestAuthors();
-      setAuthor(response.data);
+      setAuthors(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -40,16 +41,17 @@ function App() {
 
   React.useEffect(() => {
     getPaintings();
-    getAuthor();
-    setSelectedAuthor();
-  }, [getPaintings, getAuthor, setSelectedAuthor]);
+    getAuthors();
+  }, [getPaintings, getAuthors]);
 
   const handleSearchChange = (q) => {
     setParams({ ...params, q });
   };
 
-  const handSelectAuthorChange = (name) => {
-    setAuthor(name);
+  const handleSelectedAuthorChange = (name) => {
+    const findAuthor = authors.find(item => item.name === name)
+    setSelectedAuthor(findAuthor);
+    console.log(findAuthor)
   };
 
   return (
@@ -61,13 +63,13 @@ function App() {
         onChange={(event) => handleSearchChange(event.target.value)}
       />
       <Select
-        options={author}
-        value={selectedAuthor.name}
-        onChange={(event) => handSelectAuthorChange(event.target.value)}
+        options={authors}
+        value={selectedAuthor?.name}
+        onChange={handleSelectedAuthorChange}
       />
-      <div className="isLoading">
+      <div className="content">
         {isLoading ? (
-          <p className="isLoadingTrue">Loading...</p>
+          <p className="Loading">Loading...</p>
         ) : (
           <div className="card__wrapper">
             {elements.map((item, index) => (
@@ -79,7 +81,7 @@ function App() {
       <Pagination
         className="Pagination"
         currentPage={params._page}
-        pagesAmount={3}
+        pagesAmount = {NUMBER_OF_PAGES}
         onChange={(page) =>
           setParams((prevParams) => ({ ...prevParams, _page: page }))
         }
