@@ -1,10 +1,12 @@
 .wrapper {
     background-color: #fff;
+    transition: all 0.25s linear;
 }
 
 
 .wrapper_dark {
     background-color: #000;
+    transition: all 0.25s linear;
 }
 
 
@@ -31,6 +33,7 @@
 .Input {
     font-weight: 500;
     margin-right: 20px;
+    transition: all 0.25s linear;
 }
 
 
@@ -41,15 +44,30 @@
     opacity: 30%;
 }
 
-.Select {
+.Select_author {
     font-weight: 500;
-    background: transparent;
+    margin-right: 20px;
+    transition: all 0.25s linear;
 }
 
 
 option {
     font-size: 13px;
     font-weight: 400;
+}
+
+
+.Select_location {
+    margin-right: 20px;
+    font-weight: 500;
+    transition: all 0.25s linear;
+}
+
+
+.Range {
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.25s linear;
 }
 
 
@@ -71,4 +89,5 @@ option {
 
 .Pagination {
     margin-top: 20px;
+    transition: all 0.25s linear;
 }

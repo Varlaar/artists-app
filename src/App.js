@@ -5,7 +5,9 @@ import "./App.css";
 import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
-import { Input, Pagination, Select } from "fwt-internship-uikit";
+import requestLocations from "./api/locationsApi";
+import requestCreated from "./api/createdApi";
+import { Input, Pagination, Select, Range } from "fwt-internship-uikit";
 import { TOTAL_NUMBER_OF_PAGES } from "./assets/constants";
 
 function App() {
@@ -18,7 +20,10 @@ function App() {
   });
   const [authors, setAuthors] = React.useState([]);
   const [selectedAuthor, setSelectedAuthor] = React.useState(null);
+  const [locations, setLocations] = React.useState([]);
+  const [selectedLocation, setSelectedLocation] = React.useState(null);
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const [createds, setCreateds] = React.useState([]);
 
   const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
 
@@ -43,10 +48,30 @@ function App() {
     }
   }, []);
 
+  const getLocations = React.useCallback(async () => {
+    try {
+      const response = await requestLocations();
+      setLocations(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const getCreateds = React.useCallback(async () => {
+    try {
+      const response = await requestCreated();
+      setCreateds(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   React.useEffect(() => {
     getPaintings();
     getAuthors();
-  }, [getPaintings, getAuthors]);
+    getLocations();
+    getCreateds();
+  }, [getPaintings, getAuthors, getLocations, getCreateds]);
 
   const handleSearchChange = (q) => {
     setParams({ ...params, q });
@@ -56,6 +81,12 @@ function App() {
     const findAuthor = authors.find((item) => item.name === name);
     setSelectedAuthor(findAuthor);
     console.log(findAuthor);
+  };
+
+  const handleSelectedLocationChange = (location) => {
+    const findLocation = locations.find((item) => item.location === location);
+    setSelectedLocation(findLocation);
+    console.log(findLocation);
   };
 
   const handleSwitchTheme = () => {
@@ -74,7 +105,7 @@ function App() {
             onChange={(event) => handleSearchChange(event.target.value)}
           />
           <Select
-            className="Select"
+            className="Select_author"
             isDarkTheme={isDarkTheme}
             options={authors}
             value={
@@ -86,6 +117,20 @@ function App() {
             }
             onChange={handleSelectedAuthorChange}
           />
+          <Select
+            className="Select_location"
+            isDarkTheme={isDarkTheme}
+            option={locations}
+            value={
+              selectedLocation ? (
+                <option>{selectedLocation.location}</option>
+              ) : (
+                <option>Location</option>
+              )
+            }
+            onChange={handleSelectedLocationChange}
+          />
+          <Range className="Range" isDarkTheme={isDarkTheme} />
         </div>
         <div className="content">
           {isLoading ? (
