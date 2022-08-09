@@ -6,18 +6,15 @@ import "./Header.css";
 import "fwt-internship-uikit";
 
 function Header({ onClick, isDarkTheme }) {
+  const imgUrl = React.useMemo(
+    () => (isDarkTheme ? switch_theme_dark : switch_theme),
+    [isDarkTheme]
+  );
+
   return (
     <div className="container">
       <img src={logo} alt="logo" />
-      {isDarkTheme ? (
-        <img onClick={onClick} src={switch_theme} alt="switch_theme" />
-      ) : (
-        <img
-          onClick={onClick}
-          src={switch_theme_dark}
-          alt="switch_theme_dark"
-        />
-      )}
+      <img onClick={onClick} src={imgUrl} alt="switch_theme" />
     </div>
   );
 }

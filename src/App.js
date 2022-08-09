@@ -30,14 +30,18 @@ function App() {
   const getPaintings = React.useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await requestPaintings(params);
+      const response = await requestPaintings({
+        ...params,
+        authorId: selectedAuthor?.id,
+        locationId: selectedLocation?.id,
+      });
       setElements(response.data);
       setIsLoading(false);
       console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-  }, [params]);
+  }, [params, selectedLocation, selectedAuthor]);
 
   const getAuthors = React.useCallback(async () => {
     try {
@@ -51,7 +55,9 @@ function App() {
   const getLocations = React.useCallback(async () => {
     try {
       const response = await requestLocations();
-      setLocations(response.data);
+      setLocations(
+        response.data.map((item) => ({ name: item.location, id: item.id }))
+      );
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +90,7 @@ function App() {
   };
 
   const handleSelectedLocationChange = (location) => {
-    const findLocation = locations.find((item) => item.location === location);
+    const findLocation = locations.find((item) => item.name === location);
     setSelectedLocation(findLocation);
     console.log(findLocation);
   };
@@ -96,7 +102,7 @@ function App() {
   return (
     <div className={wrapperClass}>
       <div className="Container">
-        <Header onClick={handleSwitchTheme} />
+        <Header onClick={handleSwitchTheme} isDarkTheme={isDarkTheme} />
         <div className="Content">
           <Input
             className="Input"
@@ -120,10 +126,10 @@ function App() {
           <Select
             className="Select_location"
             isDarkTheme={isDarkTheme}
-            option={locations}
+            options={locations}
             value={
               selectedLocation ? (
-                <option>{selectedLocation.location}</option>
+                <option>{selectedLocation.name}</option>
               ) : (
                 <option>Location</option>
               )
