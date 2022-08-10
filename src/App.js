@@ -6,7 +6,6 @@ import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import requestLocations from "./api/locationsApi";
-import requestCreated from "./api/createdApi";
 import { Input, Pagination, Select, Range } from "fwt-internship-uikit";
 import { TOTAL_NUMBER_OF_PAGES } from "./assets/constants";
 
@@ -34,10 +33,10 @@ function App() {
         ...params,
         authorId: selectedAuthor?.id,
         locationId: selectedLocation?.id,
+        created: "",
       });
       setElements(response.data);
       setIsLoading(false);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -63,21 +62,11 @@ function App() {
     }
   }, []);
 
-  const getCreateds = React.useCallback(async () => {
-    try {
-      const response = await requestCreated();
-      setCreateds(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   React.useEffect(() => {
     getPaintings();
     getAuthors();
     getLocations();
-    getCreateds();
-  }, [getPaintings, getAuthors, getLocations, getCreateds]);
+  }, [getPaintings, getAuthors, getLocations]);
 
   const handleSearchChange = (q) => {
     setParams({ ...params, q });
@@ -138,16 +127,20 @@ function App() {
           />
           <Range className="Range" isDarkTheme={isDarkTheme} />
         </div>
-        <div className="content">
-          {isLoading ? (
-            <p className="Loading">Loading...</p>
-          ) : (
-            <div className="card__wrapper">
-              {elements.map((item, index) => (
-                <Card key={index} card={item} />
-              ))}
-            </div>
-          )}
+        {isLoading ? (
+          <p className="Loading">Loading...</p>
+        ) : (
+          <div className="card__wrapper">
+            {elements.map((item, index) => (
+              <Card key={index} card={item} />
+            ))}
+          </div>
+        )}
+        <div className="Empty">
+          {!isLoading &&
+            elements == false && ( // !{ elements } == elements (либо вот так еще работает тоже, если !elements не работает)
+              <p className="Empty__array">Not found</p>
+            )}
         </div>
         <Pagination
           className="Pagination"

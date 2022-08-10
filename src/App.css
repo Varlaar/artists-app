@@ -20,7 +20,6 @@
 .card__wrapper {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
 }
 
 
@@ -44,6 +43,7 @@
     font-family: Roboto;
     opacity: 30%;
 }
+
 
 .Select_author {
     font-weight: 500;
@@ -72,15 +72,11 @@ option {
 }
 
 
-.content {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-}
-
-
 .Loading {
-    margin: 100px 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 150px 0 150px 0;
     color: #000;
     font-size: 20px;
     font-family: Roboto;
@@ -91,4 +87,16 @@ option {
 .Pagination {
     margin-top: 20px;
     transition: all 0.25s linear;
+}
+
+
+.Empty {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:center
+}
+
+.Empty__array {
+    font-size: 50px;
+    font-weight: 700;
 }
