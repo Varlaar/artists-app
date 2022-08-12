@@ -1,4 +1,17 @@
 .wrapper {
+    background-color: #fff;
+    transition: all 0.25s linear;
+}
+
+
+.wrapper_dark {
+    background-color: #000;
+    transition: all 0.25s linear;
+}
+
+
+.Container {
+    min-height: 100vh;
     max-width: 1120px;
     margin: 0 auto;
 }
@@ -7,33 +20,63 @@
 .card__wrapper {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+}
+
+
+.Content {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 35px 0 45px 0;
 }
 
 
 .Input {
-    margin: 35px 0 45px 0;
+    font-weight: 500;
+    margin-right: 20px;
+    transition: all 0.25s linear;
 }
 
 
 .Input::placeholder {
-    color: #000;
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     font-family: Roboto;
     opacity: 30%;
 }
 
 
-.content {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
+.Select_author {
+    font-weight: 500;
+    margin-right: 20px;
+    transition: all 0.25s linear;
+}
+
+
+option {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
+.Select_location {
+    margin-right: 20px;
+    font-weight: 500;
+    transition: all 0.25s linear;
+}
+
+
+.Range {
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.25s linear;
 }
 
 
 .Loading {
-    margin: 100px 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 150px 0 150px 0;
     color: #000;
     font-size: 20px;
     font-family: Roboto;
@@ -43,4 +86,17 @@
 
 .Pagination {
     margin-top: 20px;
+    transition: all 0.25s linear;
+}
+
+
+.Empty {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:center
+}
+
+.Empty__array {
+    font-size: 50px;
+    font-weight: 700;
 }
