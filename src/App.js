@@ -23,6 +23,7 @@ function App() {
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const [createds, setCreateds] = React.useState([]);
+  const [isError, setIsError] = React.useState(false);
 
   const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
 
@@ -38,7 +39,14 @@ function App() {
       setElements(response.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+      } else if (error.request) {
+        console.log(error.request);
+      }
+      setIsError(true);
+      console.log("Error:", error.message);
     }
   }, [params, selectedLocation, selectedAuthor]);
 
@@ -118,7 +126,11 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option>{selectedLocation.name}</option>
+                <option>
+                  {selectedLocation.name.length > 33
+                    ? selectedLocation.name.slice(0, 33) + "..."
+                    : selectedLocation.name}
+                </option>
               ) : (
                 <option>Location</option>
               )
@@ -128,7 +140,21 @@ function App() {
           <Range className="Range" isDarkTheme={isDarkTheme} />
         </div>
         {isLoading ? (
-          <p className="Loading">Loading...</p>
+          isError ? (
+            !isDarkTheme ? (
+              <div className="Error">
+                <p className="Error__axios">Error 404</p>
+              </div>
+            ) : (
+              <div className="Error">
+                <p className="Error__axios_dark">Error 404</p>
+              </div>
+            )
+          ) : !isDarkTheme ? (
+            <p className="Loading">Loading...</p>
+          ) : (
+            <p className="Loading_dark">Loading...</p>
+          )
         ) : (
           <div className="card__wrapper">
             {elements.map((item, index) => (
@@ -138,19 +164,28 @@ function App() {
         )}
         <div className="Empty">
           {!isLoading &&
-            elements == false && ( // !{ elements } == elements (либо вот так еще работает тоже, если !elements не работает)
+            !isError &&
+            elements == false && // !{ elements } == elements (либо вот так еще работает тоже, если !elements не работает)
+            (!isDarkTheme ? (
               <p className="Empty__array">Not found</p>
-            )}
+            ) : (
+              <p className="Empty__array_dark">Not found</p>
+            ))}
         </div>
-        <Pagination
-          className="Pagination"
-          isDarkTheme={isDarkTheme}
-          currentPage={params._page}
-          pagesAmount={TOTAL_NUMBER_OF_PAGES}
-          onChange={(page) =>
-            setParams((prevParams) => ({ ...prevParams, _page: page }))
-          }
-        />
+        {isLoading || elements == false || (elements.length < 12 && params._page !== 3) ? ( // Тот же самый вопрос
+          <Pagination /> === null
+        ) : (
+          elements.length < 12 && params._page !==3 ? <Pagination/> === null :
+          <Pagination
+            className="Pagination"
+            isDarkTheme={isDarkTheme}
+            currentPage={params._page}
+            pagesAmount={TOTAL_NUMBER_OF_PAGES}
+            onChange={(page) =>
+              setParams((prevParams) => ({ ...prevParams, _page: page }))
+            }
+          />
+        )}
       </div>
     </div>
   );

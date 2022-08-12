@@ -78,7 +78,19 @@ option {
     justify-content: center;
     margin: 150px 0 150px 0;
     color: #000;
-    font-size: 20px;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+
+.Loading_dark {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 150px 0 150px 0;
+    color: #fff;
+    font-size: 24px;
     font-family: Roboto;
     font-weight: 500;
 }
@@ -93,10 +105,55 @@ option {
 .Empty {
     display: flex;
     flex-flow: row nowrap;
-    justify-content:center
+    justify-content:center;
 }
 
 .Empty__array {
     font-size: 50px;
     font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color:#000;
+}
+
+
+.Empty__array_dark {
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color: #fff;
+}
+
+
+.Error {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+}
+
+
+.Error__axios {
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color:#000;
+}
+
+
+.Error__axios_dark {
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color: #fff;
 }

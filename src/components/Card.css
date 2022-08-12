@@ -5,6 +5,7 @@
     overflow: hidden;
     border-radius: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .card:nth-child(3n + 2) {
@@ -12,7 +13,7 @@
     margin-left: 20px;
 }
 
-.card__img img {
+.card__img {
     width: 360px;
     height: 275px;
 }
@@ -22,10 +23,43 @@
     position: absolute;
     bottom: 5px;
     padding-left: 15px;
-    color: #ffffff;
+    color: #000;
     font-weight: 700;
     font-size: 18px;
     font-family: Roboto;
+    z-index: 1;
+}
+
+
+.card__img-bottom {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+
+.card:hover .card__img-bottom {
+    position: absolute;
+    bottom: 0;
+    height: 145px;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.75;
+}
+
+.card:hover .card__name {
+    position: absolute;
+    bottom: 120px;
+    padding-left: 15px;
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Roboto;
+    z-index: 1;
 }
 
 
