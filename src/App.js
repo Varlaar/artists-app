@@ -6,8 +6,7 @@ import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import requestLocations from "./api/locationsApi";
-import { Input, Pagination, Select, Range } from "fwt-internship-uikit";
-import { TOTAL_NUMBER_OF_PAGES } from "./assets/constants";
+import { Input, Pagination, Select } from "fwt-internship-uikit";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,10 +21,18 @@ function App() {
   const [locations, setLocations] = React.useState([]);
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-  const [createds, setCreateds] = React.useState([]);
   const [isError, setIsError] = React.useState(false);
 
   const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
+  const axiosErrorClass = classnames({
+    axiosError: true,
+    axiosError_dark: isDarkTheme,
+  });
+  const loadingClass = classnames({ Loading: true, Loading_dark: isDarkTheme });
+  const emptyArrayClass = classnames({
+    emptyArray: true,
+    emptyArray_dark: isDarkTheme,
+  });
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -38,6 +45,7 @@ function App() {
       });
       setElements(response.data);
       setIsLoading(false);
+      console.log(response.data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
@@ -83,17 +91,27 @@ function App() {
   const handleSelectedAuthorChange = (name) => {
     const findAuthor = authors.find((item) => item.name === name);
     setSelectedAuthor(findAuthor);
+    setParams({ ...params, _page: 1 });
     console.log(findAuthor);
   };
 
   const handleSelectedLocationChange = (location) => {
     const findLocation = locations.find((item) => item.name === location);
     setSelectedLocation(findLocation);
+    setParams({ ...params, _page: 1 });
     console.log(findLocation);
   };
 
   const handleSwitchTheme = () => {
     setIsDarkTheme(!isDarkTheme);
+  };
+
+  const normalizeName = (selectedLocation = "") => {
+    const normalName =
+      selectedLocation.name.length > 33
+        ? selectedLocation.name.slice(0, 33) + "..."
+        : selectedLocation.name;
+    return setSelectedLocation(normalName);
   };
 
   return (
@@ -126,34 +144,21 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option>
-                  {selectedLocation.name.length > 33
-                    ? selectedLocation.name.slice(0, 33) + "..."
-                    : selectedLocation.name}
-                </option>
+                <option>{normalizeName}</option>
               ) : (
                 <option>Location</option>
               )
             }
             onChange={handleSelectedLocationChange}
           />
-          <Range className="Range" isDarkTheme={isDarkTheme} />
         </div>
         {isLoading ? (
           isError ? (
-            !isDarkTheme ? (
-              <div className="Error">
-                <p className="Error__axios">Error 404</p>
-              </div>
-            ) : (
-              <div className="Error">
-                <p className="Error__axios_dark">Error 404</p>
-              </div>
-            )
-          ) : !isDarkTheme ? (
-            <p className="Loading">Loading...</p>
+            <div className="Error">
+              <p className={axiosErrorClass}>Error 404</p>
+            </div>
           ) : (
-            <p className="Loading_dark">Loading...</p>
+            <p className={loadingClass}>Loading...</p>
           )
         ) : (
           <div className="card__wrapper">
@@ -163,24 +168,18 @@ function App() {
           </div>
         )}
         <div className="Empty">
-          {!isLoading &&
-            !isError &&
-            elements == false && // !{ elements } == elements (либо вот так еще работает тоже, если !elements не работает)
-            (!isDarkTheme ? (
-              <p className="Empty__array">Not found</p>
-            ) : (
-              <p className="Empty__array_dark">Not found</p>
-            ))}
+          {!isLoading && !isError && elements.length === 0 && (
+            <p className={emptyArrayClass}>Not found</p>
+          )}
         </div>
-        {isLoading || elements == false || (elements.length < 12 && params._page !== 3) ? ( // Тот же самый вопрос
-          <Pagination /> === null
-        ) : (
-          elements.length < 12 && params._page !==3 ? <Pagination/> === null :
+        {!isLoading && !isError && elements.length !== 0 && (
           <Pagination
             className="Pagination"
             isDarkTheme={isDarkTheme}
             currentPage={params._page}
-            pagesAmount={TOTAL_NUMBER_OF_PAGES}
+            pagesAmount={
+              elements.length === 12 ? params._page + 2 : params._page
+            }
             onChange={(page) =>
               setParams((prevParams) => ({ ...prevParams, _page: page }))
             }

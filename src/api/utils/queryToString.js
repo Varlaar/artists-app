@@ -1,4 +1,7 @@
-const queryToString = (params) => {
+const queryToString = (params = {}) => {
+  if (Object.keys(params).length === 0) {
+    return "";
+  }
   const stringParams = Object.keys(params)
     .filter((key) => params[key])
     .map((key) => {
@@ -6,7 +9,7 @@ const queryToString = (params) => {
     })
     .join("&");
 
-  return stringParams;
+  return "?" + stringParams;
 };
 
 export default queryToString;
