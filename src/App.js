@@ -108,10 +108,10 @@ function App() {
 
   const normalizeName = (selectedLocation = "") => {
     const normalName =
-      selectedLocation.name.length > 33
-        ? selectedLocation.name.slice(0, 33) + "..."
-        : selectedLocation.name;
-    return setSelectedLocation(normalName);
+      selectedLocation.length > 33
+        ? selectedLocation.slice(0, 33) + "..."
+        : selectedLocation;
+    return normalName;
   };
 
   return (
@@ -144,7 +144,7 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option>{normalizeName}</option>
+                <option>{normalizeName(selectedLocation.name)}</option>
               ) : (
                 <option>Location</option>
               )
