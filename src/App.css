@@ -72,7 +72,7 @@ option {
 }
 
 
-.Loading {
+.loadingPaintings {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -84,7 +84,7 @@ option {
 }
 
 
-.Loading_dark {
+.loadingPaintings_dark {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -108,7 +108,7 @@ option {
     justify-content:center;
 }
 
-.emptyArray {
+.emptyArrayPaintings {
     font-size: 50px;
     font-weight: 700;
     position:absolute;
@@ -119,7 +119,7 @@ option {
 }
 
 
-.emptyArray_dark {
+.emptyArrayPaintings_dark {
     font-size: 50px;
     font-weight: 700;
     position:absolute;
@@ -137,7 +137,7 @@ option {
 }
 
 
-.axiosError {
+.paintingsError {
     display: flex;
     flex-flow: row nowrap;
     justify-content:center;
@@ -151,7 +151,7 @@ option {
 }
 
 
-.axiosError_dark {
+.paintingsError_dark {
     font-size: 50px;
     font-weight: 700;
     position:absolute;

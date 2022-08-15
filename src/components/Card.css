@@ -62,11 +62,29 @@
     position: absolute;
     bottom: 120px;
     padding-left: 15px;
-    color: #000;
+    color: rgb(14, 2, 2);
     font-weight: 700;
     font-size: 18px;
     font-family: Roboto;
     z-index: 1;
 }
 
+
+.card__name-hover--author,
+.card__name-hover--created {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+
+.card__name-hover--location {
+    font-weight: 500;
+}
+
+
+.card__name-hover--authorName,
+.card__name-hover--createdDate,
+.card__name-hover--locationName {
+    font-weight: 300;
+}
 

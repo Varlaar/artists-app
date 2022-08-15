@@ -7,6 +7,7 @@ import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import requestLocations from "./api/locationsApi";
 import { Input, Pagination, Select } from "fwt-internship-uikit";
+import normalizeName from "./api/utils/normalizeName";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -24,14 +25,17 @@ function App() {
   const [isError, setIsError] = React.useState(false);
 
   const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
-  const axiosErrorClass = classnames({
-    axiosError: true,
-    axiosError_dark: isDarkTheme,
+  const paintingsErrorClass = classnames({
+    paintingsError: true,
+    paintingsError_dark: isDarkTheme,
   });
-  const loadingClass = classnames({ Loading: true, Loading_dark: isDarkTheme });
-  const emptyArrayClass = classnames({
-    emptyArray: true,
-    emptyArray_dark: isDarkTheme,
+  const loadingPaintingsClass = classnames({
+    loadingPaintings: true,
+    loadingPaintings_dark: isDarkTheme,
+  });
+  const emptyArrayPaintingsClass = classnames({
+    emptyArrayPaintings: true,
+    emptyArrayPaintings_dark: isDarkTheme,
   });
 
   const getPaintings = React.useCallback(async () => {
@@ -106,14 +110,6 @@ function App() {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const normalizeName = (selectedLocation = "") => {
-    const normalName =
-      selectedLocation.length > 33
-        ? selectedLocation.slice(0, 33) + "..."
-        : selectedLocation;
-    return normalName;
-  };
-
   return (
     <div className={wrapperClass}>
       <div className="Container">
@@ -144,7 +140,7 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option>{normalizeName(selectedLocation.name)}</option>
+                <option>{normalizeName(selectedLocation, 33)}</option>
               ) : (
                 <option>Location</option>
               )
@@ -155,10 +151,10 @@ function App() {
         {isLoading ? (
           isError ? (
             <div className="Error">
-              <p className={axiosErrorClass}>Error 404</p>
+              <p className={paintingsErrorClass}>Error 404</p>
             </div>
           ) : (
-            <p className={loadingClass}>Loading...</p>
+            <p className={loadingPaintingsClass}>Loading...</p>
           )
         ) : (
           <div className="card__wrapper">
@@ -169,7 +165,7 @@ function App() {
         )}
         <div className="Empty">
           {!isLoading && !isError && elements.length === 0 && (
-            <p className={emptyArrayClass}>Not found</p>
+            <p className={emptyArrayPaintingsClass}>Not found</p>
           )}
         </div>
         {!isLoading && !isError && elements.length !== 0 && (

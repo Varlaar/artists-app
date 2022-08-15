@@ -4,12 +4,12 @@ import "./Card.css";
 import empty_image from "../assets/img/empty_image.png";
 import requestLocations from "../api/locationsApi";
 import requestAuthors from "../api/authorsApi";
+import normalizeName from "../api/utils/normalizeName";
 
 export default React.memo(function Card({ card }) {
   const imageUrl = API_URL + card.imageUrl;
   const imageErrorSrc = empty_image;
-  const sliced =
-    card.name.length > 37 ? card.name.slice(0, 37) + "..." : card.name;
+  const normalizeCardName = normalizeName(card, 37);
 
   const [isHover, setIsHover] = React.useState(false);
   const [location, setLocation] = React.useState(null);
@@ -58,25 +58,31 @@ export default React.memo(function Card({ card }) {
           e.target.onerror = null;
           e.target.src = imageErrorSrc;
         }}
-        alt={sliced}
+        alt={normalizeCardName}
       />
       <div className="card__img-bottom">
-        <div className="card__name">{sliced}</div>
+        <div className="card__name">{normalizeCardName}</div>
         {isHover && (
-          <>
-            <div className="card__name-hover">
-              <p style={{ fontWeight: 500, marginBottom: 5 }}>
-                Author: <span style={{ fontWeight: 300 }}>{author?.name}</span>
-              </p>
-              <p style={{ fontWeight: 500, marginBottom: 5 }}>
-                Created: <span style={{ fontWeight: 300 }}>{card.created}</span>
-              </p>
-              <p style={{ fontWeight: 500 }}>
-                Location:{" "}
-                <span style={{ fontWeight: 300 }}>{location?.location}</span>
-              </p>
-            </div>
-          </>
+          <div className="card__name-hover">
+            <p className="card__name-hover--author">
+              Author:{" "}
+              <span className="card__name-hover--authorName">
+                {author?.name}
+              </span>
+            </p>
+            <p className="card__name-hover--created">
+              Created:{" "}
+              <span className="card__name-hover--createdDate">
+                {card.created}
+              </span>
+            </p>
+            <p className="card__name-hover--location">
+              Location:{" "}
+              <span className="card__name-hover--locationName">
+                {location?.location}
+              </span>
+            </p>
+          </div>
         )}
       </div>
     </div>
