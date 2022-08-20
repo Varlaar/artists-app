@@ -1,0 +1,64 @@
+@import "../commons/media-breakpoints.scss";
+@import "../commons/variables.scss";
+
+@include desktop {
+    .card {
+        height: 230px;
+    }
+}
+
+@include laptop {
+    .card {
+        height: 249px;
+        margin-right: 0;
+        width: calc((100% / 2) - (1.25rem / 2));
+
+        &:nth-child(2n) {
+            margin-left: 1.25rem;
+        }
+    }
+}
+
+@include tablet {
+    .card {
+        height: 290px;
+        width: 100%;
+
+        &:nth-child(2n) {
+            margin-left: 0;
+        }
+
+        &:hover .card__name_hover {
+            bottom: 95px;
+        }
+
+        &:hover {
+            .card__img-bottom {
+                height: 120px;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .card {
+        height: 205px;
+        width: 100%;
+
+        &:nth-child(2n) {
+            margin-left: 0;
+        }
+
+        &:hover .card__name_hover {
+            bottom: 95px;
+        }
+
+        &:hover {
+            .card__img-bottom {
+                height: 120px;
+                width: 100%;
+            }
+        }
+    }
+}

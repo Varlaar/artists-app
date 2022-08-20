@@ -1,0 +1,283 @@
+@import './commons/variables.scss';
+
+.wrapper {
+    background-color: $wrapper-color;
+    transition: $transition;
+
+    .container {
+        min-height: 100vh;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 25px 0 25px;
+    }
+
+    .wrapper-card {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .content {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 35px 0 45px 0;
+
+        .input__paintings {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .input__paintings::placeholder {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 30%;
+        }
+
+        .select__author {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .select__title {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .select__location {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .range {
+            font-size: 13px;
+            font-weight: 400;
+            transition: $transition;
+            min-width: 265px;
+        }
+    }
+
+    .loadingPaintings {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin: 150px 0 150px 0;
+        color: $theme-color;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        transition: $transition;
+    }
+
+    .empty {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+    .emptyArrayPaintings {
+        font-size: 50px;
+        font-weight: 700;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color;
+    }
+
+    .error {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+    .paintingsError {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: 700;
+        margin-top: 150px;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color;
+    }
+}
+
+.wrapper_dark {
+    background-color: $wrapper-color--dark;
+    transition: $transition;
+
+    .loadingPaintings_dark {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin: 150px 0 150px 0;
+        color: $theme-color--dark;
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .emptyArrayPaintings_dark {
+        font-size: 50px;
+        font-weight: 700;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color--dark;
+    }
+
+    .paintingsError_dark {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: 700;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color--dark;
+    }
+}
+
+
+// @media screen and (max-width: 1365px) {
+//     .wrapper {
+//         .container {
+//             padding: 0 42px 0 42px;
+//         }
+
+//         .content {
+
+//             .input__paintings {
+//                 min-width: 220px;
+//                 flex-grow: 1;
+//             }
+
+//             .select__author {
+//                 min-width: 220px;
+//                 flex-grow: 1;
+//             }
+
+//             .select__location {
+//                 min-width: 220px;
+//                 flex-grow: 1;
+//             }
+
+//             .range {
+//                 min-width: 220px;
+//                 flex-grow: 1;
+//             }
+//         }
+//     }
+// }
+
+// @media screen and (max-width: 1023px) {
+//     .wrapper {
+//         .container {
+//             max-width: 940px;
+//             padding: 0 34px 0 34px;
+//         }
+
+//         .content {
+
+//             .input__paintings {
+//                 min-width: 160px;
+//             }
+
+//             .select__author {
+//                 min-width: 160px;
+//             }
+
+//             .select__location {
+//                 min-width: 160px;
+//             }
+
+//             .range {
+//                 min-width: 160px;
+//             }
+//         }
+
+//         .pagination {
+//             margin-top: 15px;
+//         }
+//     }
+// }
+
+// @media screen and (max-width: 767px) {
+//     .wrapper {
+//         .container {
+//             max-width: 700px;
+//             padding: 0 20px 0 20px;
+//         }
+
+//         .content {
+//             flex-flow: column nowrap;
+//             padding: 25px 0 45px 0;
+
+//             .wrapper-card {
+//                 flex-flow: column nowrap;
+//             }
+
+//             .input__paintings {
+//                 margin: 0 0 15px 0;
+//                 width: 100%;
+//             }
+
+//             .input__paintings::placeholder {
+//                 font-size: 14px;
+//             }
+
+//             .select__author {
+//                 margin: 0 0 15px 0;
+//                 width: 100%;
+//             }
+
+//             .select__location {
+//                 margin: 0 0 15px 0;
+//                 width: 100%;
+//             }
+
+//             .range {
+//                 width: 100%;
+//                 font-size: 14px;
+//             }
+
+//             .select__title {
+//                 font-size: 14px;
+//             }
+//         }
+
+//         .pagination {
+//             width: 100%;
+//             margin-top: 10px;
+//         }
+
+//         .PaginationPage {
+//             width: 100%;
+//         }
+
+//         .emptyArrayPaintings {
+//             font-size: 40px;
+//             top: 450px;
+//         }
+
+//         .loadingPaintings {
+//             margin: 0;
+//         }
+
+//         .paintingsError {
+//             font-size: 40px;
+//             margin-top: 50px;
+//         }
+//     }
+// }
