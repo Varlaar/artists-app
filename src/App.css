@@ -72,13 +72,25 @@ option {
 }
 
 
-.Loading {
+.loadingPaintings {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     margin: 150px 0 150px 0;
     color: #000;
-    font-size: 20px;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 600;
+}
+
+
+.loadingPaintings_dark {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 150px 0 150px 0;
+    color: #fff;
+    font-size: 24px;
     font-family: Roboto;
     font-weight: 500;
 }
@@ -93,10 +105,58 @@ option {
 .Empty {
     display: flex;
     flex-flow: row nowrap;
-    justify-content:center
+    justify-content:center;
 }
 
-.Empty__array {
+.emptyArrayPaintings {
     font-size: 50px;
     font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color:#000;
+}
+
+
+.emptyArrayPaintings_dark {
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color: #fff;
+}
+
+
+.Error {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+}
+
+
+.paintingsError {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color:#000;
+}
+
+
+.paintingsError_dark {
+    font-size: 50px;
+    font-weight: 700;
+    position:absolute;
+    width:100%;
+    top:50%;
+    text-align:center;
+    color: #fff;
 }

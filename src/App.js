@@ -6,8 +6,8 @@ import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import requestLocations from "./api/locationsApi";
-import { Input, Pagination, Select, Range } from "fwt-internship-uikit";
-import { TOTAL_NUMBER_OF_PAGES } from "./assets/constants";
+import { Input, Pagination, Select } from "fwt-internship-uikit";
+import normalizeName from "./api/utils/normalizeName";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,9 +22,21 @@ function App() {
   const [locations, setLocations] = React.useState([]);
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-  const [createds, setCreateds] = React.useState([]);
+  const [isError, setIsError] = React.useState(false);
 
   const wrapperClass = classnames({ wrapper: true, wrapper_dark: isDarkTheme });
+  const paintingsErrorClass = classnames({
+    paintingsError: true,
+    paintingsError_dark: isDarkTheme,
+  });
+  const loadingPaintingsClass = classnames({
+    loadingPaintings: true,
+    loadingPaintings_dark: isDarkTheme,
+  });
+  const emptyArrayPaintingsClass = classnames({
+    emptyArrayPaintings: true,
+    emptyArrayPaintings_dark: isDarkTheme,
+  });
 
   const getPaintings = React.useCallback(async () => {
     try {
@@ -37,8 +49,16 @@ function App() {
       });
       setElements(response.data);
       setIsLoading(false);
+      console.log(response.data);
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+      } else if (error.request) {
+        console.log(error.request);
+      }
+      setIsError(true);
+      console.log("Error:", error.message);
     }
   }, [params, selectedLocation, selectedAuthor]);
 
@@ -75,12 +95,14 @@ function App() {
   const handleSelectedAuthorChange = (name) => {
     const findAuthor = authors.find((item) => item.name === name);
     setSelectedAuthor(findAuthor);
+    setParams({ ...params, _page: 1 });
     console.log(findAuthor);
   };
 
   const handleSelectedLocationChange = (location) => {
     const findLocation = locations.find((item) => item.name === location);
     setSelectedLocation(findLocation);
+    setParams({ ...params, _page: 1 });
     console.log(findLocation);
   };
 
@@ -118,17 +140,22 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option>{selectedLocation.name}</option>
+                <option>{normalizeName(selectedLocation, 33)}</option>
               ) : (
                 <option>Location</option>
               )
             }
             onChange={handleSelectedLocationChange}
           />
-          <Range className="Range" isDarkTheme={isDarkTheme} />
         </div>
         {isLoading ? (
-          <p className="Loading">Loading...</p>
+          isError ? (
+            <div className="Error">
+              <p className={paintingsErrorClass}>Error 404</p>
+            </div>
+          ) : (
+            <p className={loadingPaintingsClass}>Loading...</p>
+          )
         ) : (
           <div className="card__wrapper">
             {elements.map((item, index) => (
@@ -137,20 +164,23 @@ function App() {
           </div>
         )}
         <div className="Empty">
-          {!isLoading &&
-            elements == false && ( // !{ elements } == elements (либо вот так еще работает тоже, если !elements не работает)
-              <p className="Empty__array">Not found</p>
-            )}
+          {!isLoading && !isError && elements.length === 0 && (
+            <p className={emptyArrayPaintingsClass}>Not found</p>
+          )}
         </div>
-        <Pagination
-          className="Pagination"
-          isDarkTheme={isDarkTheme}
-          currentPage={params._page}
-          pagesAmount={TOTAL_NUMBER_OF_PAGES}
-          onChange={(page) =>
-            setParams((prevParams) => ({ ...prevParams, _page: page }))
-          }
-        />
+        {!isLoading && !isError && elements.length !== 0 && (
+          <Pagination
+            className="Pagination"
+            isDarkTheme={isDarkTheme}
+            currentPage={params._page}
+            pagesAmount={
+              elements.length === 12 ? params._page + 2 : params._page
+            }
+            onChange={(page) =>
+              setParams((prevParams) => ({ ...prevParams, _page: page }))
+            }
+          />
+        )}
       </div>
     </div>
   );
