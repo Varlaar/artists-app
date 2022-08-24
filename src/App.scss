@@ -1,0 +1,150 @@
+@import './commons/variables.scss';
+
+.wrapper {
+    background-color: $wrapper-color;
+    transition: $transition;
+
+    .container {
+        min-height: 100vh;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 25px 0 25px;
+    }
+
+    .wrapper-card {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .content {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 35px 0 45px 0;
+
+        .input__paintings {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .input__paintings::placeholder {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 30%;
+        }
+
+        .select__author {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .select__title {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .select__location {
+            font-weight: 500;
+            margin-right: 20px;
+            transition: $transition;
+            min-width: 265px;
+        }
+
+        .range {
+            font-size: 13px;
+            font-weight: 400;
+            transition: $transition;
+            min-width: 265px;
+        }
+    }
+
+    .loadingPaintings {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin: 150px 0 150px 0;
+        color: $theme-color;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        transition: $transition;
+    }
+
+    .empty {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+    .emptyArrayPaintings {
+        font-size: 50px;
+        font-weight: 700;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color;
+    }
+
+    .error {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+    .paintingsError {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: 700;
+        margin-top: 150px;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color;
+    }
+}
+
+.wrapper_dark {
+    background-color: $wrapper-color--dark;
+    transition: $transition;
+
+    .loadingPaintings_dark {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin: 150px 0 150px 0;
+        color: $theme-color--dark;
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .emptyArrayPaintings_dark {
+        font-size: 50px;
+        font-weight: 700;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color--dark;
+    }
+
+    .paintingsError_dark {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        font-size: 50px;
+        font-weight: 700;
+        width: 100%;
+        top: 50%;
+        text-align: center;
+        color: $theme-color--dark;
+    }
+}

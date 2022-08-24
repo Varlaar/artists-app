@@ -1,15 +1,14 @@
 import React from "react";
-import { API_URL } from "../assets/constants";
-import "./Card.css";
-import empty_image from "../assets/img/empty_image.png";
 import requestLocations from "../api/locationsApi";
 import requestAuthors from "../api/authorsApi";
-import normalizeName from "../api/utils/normalizeName";
+import empty_image from "../assets/img/empty_image.png";
+import { API_URL } from "../assets/constants";
+import "./Card.scss";
+import "./Card-media.scss";
 
 export default React.memo(function Card({ card }) {
   const imageUrl = API_URL + card.imageUrl;
   const imageErrorSrc = empty_image;
-  const normalizeCardName = normalizeName(card, 37);
 
   const [isHover, setIsHover] = React.useState(false);
   const [location, setLocation] = React.useState(null);
@@ -47,7 +46,7 @@ export default React.memo(function Card({ card }) {
 
   return (
     <div
-      className="card"
+      className="card card_positioning"
       onMouseEnter={handleHover}
       onMouseLeave={handleMouseLeave}
     >
@@ -58,27 +57,23 @@ export default React.memo(function Card({ card }) {
           e.target.onerror = null;
           e.target.src = imageErrorSrc;
         }}
-        alt={normalizeCardName}
+        alt={card.name}
       />
       <div className="card__img-bottom">
-        <div className="card__name">{normalizeCardName}</div>
+        <div className="card__name card__name_hover">{card.name}</div>
         {isHover && (
-          <div className="card__name-hover">
-            <p className="card__name-hover--author">
+          <div className="card__item">
+            <p className="card__subtitle card__subtitle_margin-bottom">
               Author:{" "}
-              <span className="card__name-hover--authorName">
-                {author?.name}
-              </span>
+              <span className="card__subtitle-description">{author?.name}</span>
             </p>
-            <p className="card__name-hover--created">
+            <p className="card__subtitle card__subtitle_margin-bottom">
               Created:{" "}
-              <span className="card__name-hover--createdDate">
-                {card.created}
-              </span>
+              <span className="card__subtitle-description">{card.created}</span>
             </p>
-            <p className="card__name-hover--location">
+            <p className="card__subtitle">
               Location:{" "}
-              <span className="card__name-hover--locationName">
+              <span className="card__subtitle-description">
                 {location?.location}
               </span>
             </p>

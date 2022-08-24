@@ -1,13 +1,13 @@
 import React from "react";
-import classnames from "classnames";
 import Header from "./Header/Header";
-import "./App.css";
 import Card from "./components/Card";
 import requestAuthors from "./api/authorsApi";
 import requestPaintings from "./api/paintingsApi";
 import requestLocations from "./api/locationsApi";
-import { Input, Pagination, Select } from "fwt-internship-uikit";
-import normalizeName from "./api/utils/normalizeName";
+import classnames from "classnames";
+import { Input, Pagination, Select, Range } from "fwt-internship-uikit";
+import "./App.scss";
+import "./App-media.scss";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -45,7 +45,6 @@ function App() {
         ...params,
         authorId: selectedAuthor?.id,
         locationId: selectedLocation?.id,
-        created: "",
       });
       setElements(response.data);
       setIsLoading(false);
@@ -112,65 +111,72 @@ function App() {
 
   return (
     <div className={wrapperClass}>
-      <div className="Container">
+      <div className="container">
         <Header onClick={handleSwitchTheme} isDarkTheme={isDarkTheme} />
-        <div className="Content">
+        <div className="content">
           <Input
-            className="Input"
+            className="input__paintings"
             isDarkTheme={isDarkTheme}
             placeholder="Name"
             onChange={(event) => handleSearchChange(event.target.value)}
           />
           <Select
-            className="Select_author"
+            className="select__author"
             isDarkTheme={isDarkTheme}
             options={authors}
             value={
               selectedAuthor ? (
-                <option>{selectedAuthor.name}</option>
+                <option className="select__title">{selectedAuthor.name}</option>
               ) : (
-                <option>Author</option>
+                <option className="select__title">Author</option>
               )
             }
             onChange={handleSelectedAuthorChange}
           />
           <Select
-            className="Select_location"
+            className="select__location"
             isDarkTheme={isDarkTheme}
             options={locations}
             value={
               selectedLocation ? (
-                <option>{normalizeName(selectedLocation, 33)}</option>
+                <option className="select__title">
+                  {selectedLocation.name}
+                </option>
               ) : (
-                <option>Location</option>
+                <option className="select__title">Location</option>
               )
             }
             onChange={handleSelectedLocationChange}
           />
+          <Range
+            className="range"
+            isDarkTheme={isDarkTheme}
+            onClose={() => null}
+          />
         </div>
         {isLoading ? (
           isError ? (
-            <div className="Error">
+            <div className="error">
               <p className={paintingsErrorClass}>Error 404</p>
             </div>
           ) : (
             <p className={loadingPaintingsClass}>Loading...</p>
           )
         ) : (
-          <div className="card__wrapper">
+          <div className="wrapper-card">
             {elements.map((item, index) => (
               <Card key={index} card={item} />
             ))}
           </div>
         )}
-        <div className="Empty">
+        <div className="empty">
           {!isLoading && !isError && elements.length === 0 && (
             <p className={emptyArrayPaintingsClass}>Not found</p>
           )}
         </div>
         {!isLoading && !isError && elements.length !== 0 && (
           <Pagination
-            className="Pagination"
+            className="pagination"
             isDarkTheme={isDarkTheme}
             currentPage={params._page}
             pagesAmount={
