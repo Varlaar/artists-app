@@ -15,7 +15,12 @@ function Header({ onClick, isDarkTheme }) {
   return (
     <div className="container-header">
       <img src={logo} alt="logo" />
-      <img className="switch-theme" onClick={onClick} src={imgUrl} alt="switch_theme" />
+      <img
+        className="switch-theme"
+        onClick={onClick}
+        src={imgUrl}
+        alt="switch_theme"
+      />
     </div>
   );
 }
