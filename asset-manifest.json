@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/artists_app/static/css/main.2594cf0a.css",
+    "main.css": "/artists_app/static/css/main.56100688.css",
     "main.js": "/artists_app/static/js/main.e4208396.js",
     "static/js/787.2aa363c2.chunk.js": "/artists_app/static/js/787.2aa363c2.chunk.js",
     "static/media/roboto-latin-900italic.woff": "/artists_app/static/media/roboto-latin-900italic.c20d916c1a1b094c1cec.woff",
@@ -29,12 +29,12 @@
     "static/media/roboto-latin-400.woff2": "/artists_app/static/media/roboto-latin-400.176f8f5bd5f02b3abfcf.woff2",
     "static/media/roboto-latin-900.woff2": "/artists_app/static/media/roboto-latin-900.870c8c1486f76054301a.woff2",
     "index.html": "/artists_app/index.html",
-    "main.2594cf0a.css.map": "/artists_app/static/css/main.2594cf0a.css.map",
+    "main.56100688.css.map": "/artists_app/static/css/main.56100688.css.map",
     "main.e4208396.js.map": "/artists_app/static/js/main.e4208396.js.map",
     "787.2aa363c2.chunk.js.map": "/artists_app/static/js/787.2aa363c2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2594cf0a.css",
+    "static/css/main.56100688.css",
     "static/js/main.e4208396.js"
   ]
 }
