@@ -63,20 +63,20 @@ export default React.memo(function Card({ card }) {
         <div className="card__name card__name_hover">{card.name}</div>
         {isHover && (
           <div className="card__item">
-            <p className="card__subtitle card__subtitle_margin-bottom">
+            <div className="card__subtitle card__subtitle_margin-bottom">
               Author:{" "}
               <span className="card__subtitle-description">{author?.name}</span>
-            </p>
-            <p className="card__subtitle card__subtitle_margin-bottom">
+            </div>
+            <div className="card__subtitle card__subtitle_margin-bottom">
               Created:{" "}
               <span className="card__subtitle-description">{card.created}</span>
-            </p>
-            <p className="card__subtitle">
+            </div>
+            <div className="card__subtitle">
               Location:{" "}
               <span className="card__subtitle-description">
                 {location?.location}
               </span>
-            </p>
+            </div>
           </div>
         )}
       </div>

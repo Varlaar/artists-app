@@ -126,9 +126,9 @@ function App() {
             options={authors}
             value={
               selectedAuthor ? (
-                <option className="select__title">{selectedAuthor.name}</option>
+                <span className="select__title">{selectedAuthor.name}</span>
               ) : (
-                <option className="select__title">Author</option>
+                <span className="select__title">Author</span>
               )
             }
             onChange={handleSelectedAuthorChange}
@@ -139,11 +139,9 @@ function App() {
             options={locations}
             value={
               selectedLocation ? (
-                <option className="select__title">
-                  {selectedLocation.name}
-                </option>
+                <span className="select__title">{selectedLocation.name}</span>
               ) : (
-                <option className="select__title">Location</option>
+                <span className="select__title">Location</span>
               )
             }
             onChange={handleSelectedLocationChange}
